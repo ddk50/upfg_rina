@@ -39,3 +39,6 @@ def test_execute(init):
     r = init.execute("/rina help")
     assert r == "私、天王寺璃奈。どっちでも好きな方つかっていいよ//"
 
+def test_add_and_notify(init):
+    r = init.execute('/rina notify "Hello world" 7/25 5:00')
+    

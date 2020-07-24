@@ -23,7 +23,8 @@ class Msg:
         return self.notify_hours
 
     def get_notification_times(self):
-        return ", ".join(self.notify_hours.keys())
+        mapped_list = map(str, self.notify_hours.keys())
+        return ', '.join(mapped_list)
 
     def broadcast_or_not(self, now = datetime.datetime.now()):
         delta = self.start_time - now

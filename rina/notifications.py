@@ -12,6 +12,7 @@ class Notifications:
     def __init__(self):
         for i in range(MAX_SLOT_NUM):
             self.slots[i] = None
+        self.angry_count = 0
 
     def get_all(self):
         return self.slots
@@ -26,6 +27,15 @@ class Notifications:
                 self.slots[i] = Msg(start_time, msg)
                 return self.slots[i]
         return None
+
+    def angry(self):
+        str = ""
+        with open(path) as f:
+            while True:
+                str += f.readline()
+                if not s_line:
+                    break
+        return str
 
     def execute_notify(self, rest_msg):
         notify      = Notifications.parse_notify(rest_msg)
@@ -52,7 +62,7 @@ class Notifications:
                 return '私、天王寺璃奈。どっちでも好きな方つかっていいよ//'
             elif first == 'list':
                 print(f"Incoming list command")
-                list = slots.get_all()
+                list = self.get_all()
                 return f"予約されてる告知は: \n ${list} だよ"
             elif first == 'tong':
                 return f"トングさんは{rest}。璃奈、覚えた"
@@ -60,7 +70,12 @@ class Notifications:
                 print(f"Incoming notify command {rest}")
                 return self.execute_notify(rest)
             else:
-                return 'なにいってるのかよくわからない... /rina help で使い方が見れるよ'
+                self.angry_count += 1
+                str = 'なにいってるのかよくわからない... /rina help で使い方が見れるよ'
+                if self.angry_count >= 3:
+                    self.angry_count = 0
+                    str = self.angry()
+                return str
             return None
 
     @staticmethod
