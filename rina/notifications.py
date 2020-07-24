@@ -53,9 +53,9 @@ class Notifications:
             elif first == 'list':
                 print(f"Incoming list command")
                 list = slots.get_all()
-                return '予約されてる告知は: \n ${list} だよ'
+                return f"予約されてる告知は: \n ${list} だよ"
             elif first == 'tong':
-                return 'トングさんは{rest}。璃奈、覚えた'
+                return f"トングさんは{rest}。璃奈、覚えた"
             elif first == 'notify':
                 print(f"Incoming notify command {rest}")
                 return self.execute_notify(rest)
