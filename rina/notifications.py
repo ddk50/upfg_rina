@@ -1,6 +1,7 @@
 import datetime
 import sqlite3
 import re
+from texttable import Texttable
 
 from dateutil.parser import parse
 from .msg import Msg
@@ -15,7 +16,7 @@ class Notifications:
         self.angry_count = 0
 
     def get_all(self):
-        return self.slots
+        return filter(lambda x: x != None, self.slots)
 
     def size(self):
         return len(self.slots)
@@ -36,6 +37,13 @@ class Notifications:
                 if not s_line:
                     break
         return str
+
+    def get_pp(self):
+        table = Texttable()
+        table.set_deco(Texttable.HEADER)
+        table.set_cols_dtype(['t', 't', 'i', 'i', 'i', 'i', 'i'])
+        table.add_rows([["msg", "date", "24", "12", "6", "3", "1"]])
+        
 
     def execute_notify(self, rest_msg):
         notify      = Notifications.parse_notify(rest_msg)

@@ -47,7 +47,8 @@ async def loop():
     for k, v in notifi.get_all():
         msg = v.broadcast_or_not()
         if msg != None:
+            print(f"broadcast: {msg}")
             await client.get_channel(BROAD_CAST_CHANNEL).send(msg)
-    
+
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
