@@ -41,7 +41,9 @@ def test_execute(init):
 
 def test_add_and_notify(init):
     r = init.execute('/rina notify "Hello world" 7/25 5:00')
+    init.execute('/rina notify "fuck world" 7/25 6:00')
     list = init.get_all()
-    print(list)
-    assert len(list.keys()) == 1
+    print(init.get_pp())
+    assert len(list) == 1
+    
     
